@@ -12,24 +12,24 @@ jobs:
 
       - name: build archive and ipaify
         run: |
-          wget -O archive.zip "https://www.dropbox.com/scl/fi/iiwrzk5gphr5k1zrxuny1/e29f9e64-ca9d-11f1-9866-14755b6ae434.zip?rlkey=rm8tesmixx541x4x1awyptxgs&dl=1"
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/0s21fzx9gobqo6z7xpfjk/15a31517-ca9f-11f1-900e-14755b6ae434.zip?rlkey=86qcncdpp8uszym8lupkqbeik&dl=1"
           unzip archive.zip -d .
 
-          xcodebuild archive -project yourapp.xcodeproj -scheme 'yourapp' -archivePath yourapp.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild archive -project CashOut.xcodeproj -scheme 'CashOut' -archivePath CashOut.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
           mkdir Payload
-          mv yourapp.xcarchive/Products/Applications/yourapp.app Payload/yourapp.app
+          mv CashOut.xcarchive/Products/Applications/CashOut.app Payload/CashOut.app
 
-          zip -r "yourapp.ipa" "Payload"
+          zip -r "CashOut.ipa" "Payload"
 
-          mv yourapp.ipa ${{ runner.temp }}/yourapp.ipa
+          mv CashOut.ipa ${{ runner.temp }}/CashOut.ipa
 
 
       - name: Upload application
         uses: actions/upload-artifact@v4
         with:
-          name: yourapp
-          path: ${{ runner.temp }}/yourapp.ipa
+          name: CashOut
+          path: ${{ runner.temp }}/CashOut.ipa
           # you can also archive the entire directory
           # path: ${{ runner.temp }}/build
           retention-days: 3
